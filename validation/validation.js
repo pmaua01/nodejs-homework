@@ -8,6 +8,10 @@ const addContactSchema = Joi.object({
   email: Joi.string().min(3).required(),
 });
 
+const updateFavorite = Joi.object({
+  favorite: Joi.string().min(4).required(),
+});
+
 function validateBody(schema) {
   return (req, res, next) => {
     console.log(req.body);
@@ -19,4 +23,4 @@ function validateBody(schema) {
   };
 }
 
-module.exports = { addContactSchema, validateBody };
+module.exports = { addContactSchema, updateFavorite, validateBody };

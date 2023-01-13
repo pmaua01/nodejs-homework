@@ -4,10 +4,12 @@ const {
   controllerAddContact,
   controllerRemoveContact,
   controllerUpdateContact,
+  controllerUpdatefavorite,
 } = require("../../controllers/contactsController");
 
 const {
   addContactSchema,
+  updateFavorite,
   validateBody,
 } = require("../../validation/validation");
 
@@ -27,6 +29,12 @@ router.put(
   "/:contactId",
   validateBody(addContactSchema),
   controllerUpdateContact
+);
+
+router.put(
+  "/:contactId/favorite",
+  validateBody(updateFavorite),
+  controllerUpdatefavorite
 );
 
 module.exports = router;

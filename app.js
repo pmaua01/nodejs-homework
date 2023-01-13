@@ -7,6 +7,7 @@ const contactsRouter = require("./routes/api/contacts");
 const app = express();
 
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
+console.log(process.env.HOST_URI);
 
 app.use(logger(formatsLogger));
 app.use(cors());
@@ -25,4 +26,4 @@ app.use((err, req, res, next) => {
   return res.status(500).json({ message: err.message });
 });
 
-module.exports = app;
+module.exports = { app };
