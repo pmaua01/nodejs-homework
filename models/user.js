@@ -23,6 +23,10 @@ const schema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "user",
   },
+  avatarURL: {
+    type: String,
+    default: "",
+  },
 });
 
 const User = mongoose.model("User", schema);
