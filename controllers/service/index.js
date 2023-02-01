@@ -20,20 +20,13 @@ async function uploadLocal(req, res, next) {
   console.log("tmpPathsmall", tmpPathsmall);
 
   const publicPath = path.resolve(__dirname, "../../public/avatars", filename);
-  //   await Jimp.read(tmpPath)
-  //     .then((image) => {
-  //       return image.resize(250, 250).write(tmpPath);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
 
   console.log("tmpPath", tmpPath);
-  //   console.log("tmpPath", tmpPath);
-  //   console.log("publiPath", publicPath);
+
   try {
     const resize = await Jimp.read(tmpPath);
-    resize.resize(250, 250).write(tmpPath);
+    await resize.resize(250, 250);
+    await resize.writeAsync(tmpPath);
     await fs.rename(tmpPath, publicPath);
     await User.findByIdAndUpdate(userIdAfterMiddle, {
       avatarURL: `http://localhost:3000/avatars/${filename}`,
