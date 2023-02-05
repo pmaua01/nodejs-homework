@@ -15,6 +15,9 @@ async function login(req, res, next) {
   if (!isPasswordValid) {
     return next(httpError(401, "Email or password is wrong"));
   }
+  if (!findUser.verify) {
+    return next(httpError(401, "Email is not verified"));
+  }
   const token = jwt.sign({ id: findUser._id }, process.env.JWT_TOKEN, {
     expiresIn: "1h",
   });

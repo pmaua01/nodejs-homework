@@ -17,6 +17,10 @@ const addUserSchema = Joi.object({
   password: Joi.string().min(5).required(),
 });
 
+const validateUserSchema = Joi.object({
+  email: Joi.string().min(3).required(),
+});
+
 function validateBody(schema) {
   return (req, res, next) => {
     console.log("validation", req.body);
@@ -43,6 +47,7 @@ module.exports = {
   addContactSchema,
   updateFavorite,
   addUserSchema,
+  validateUserSchema,
   validateBody,
   validateAuth,
 };

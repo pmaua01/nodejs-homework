@@ -6,10 +6,16 @@ const { logout } = require("../controllers");
 const { auth } = require("../middlewares");
 const { current } = require("../controllers");
 const { upload } = require("../middlewares");
+const { verifyEmail } = require("../controllers");
+const { checkVerify } = require("../controllers");
 
 const { uploadLocal } = require("../controllers");
 
-const { addUserSchema, validateAuth } = require("../validation/validation");
+const {
+  addUserSchema,
+  validateUserSchema,
+  validateAuth,
+} = require("../validation/validation");
 
 const authRouter = express.Router();
 
@@ -25,5 +31,9 @@ authRouter.patch(
 
   uploadLocal
 );
+
+authRouter.get("/verify/:verificationToken", verifyEmail);
+
+authRouter.post("/verify", validateAuth(validateUserSchema), checkVerify);
 
 module.exports = authRouter;
